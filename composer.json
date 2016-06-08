@@ -1,0 +1,28 @@
+{
+    "name": "izyue/yii2-admin",
+    "description": "Yii2-Admin",
+    "license": "izyue",
+    "type": "yii2-extension",
+    "authors": [
+        {
+            "name": "刘李鹏",
+            "email": "liu.lipeng@icloud.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/liulipeng/yii2-admin/issues",
+        "source": "https://github.com/liulipeng/yii2-admin"
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "yiisoft/yii2": "~2.0.4"
+    },
+    "suggest": {
+        "yiisoft/yii2-bootstrap": "Used when using layout 'left-menu', 'right-menu' or 'top-menu'"
+    },
+    "autoload": {
+        "psr-4": {
+            "izyue\\admin\\": ""
+        }
+    }
+}
