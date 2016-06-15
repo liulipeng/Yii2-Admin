@@ -48,7 +48,7 @@ class MenuController extends Controller
         if (Yii::$app->request->isAjax) {
             Yii::$app->getResponse()->format = 'json';
             $id = intval(Yii::$app->request->post('id'));
-            $menuRows = MenuHelper::getAssignedMenu(Yii::$app->user->id, $id);
+            $menuRows = MenuHelper::getMenu(Yii::$app->user->id, $id);
             $menus = [
                 'status' => 'OK',
                 'data' => null,
@@ -66,9 +66,6 @@ class MenuController extends Controller
                     }
                 }
             }
-//            echo '<pre>';
-//            print_r($menuRows);
-//            die;
             return $menus;
         }
 

@@ -141,6 +141,62 @@ class MenuHelper
     }
 
     /**
+     * Use to get assigned menu of user.
+     * @param mixed $userId
+     * @param integer $root
+     * @param \Closure $callback use to reformat output.
+     * callback should have format like
+     *
+     * ~~~
+     * function ($menu) {
+     *    return [
+     *        'label' => $menu['name'],
+     *        'url' => [$menu['route']],
+     *        'options' => $data,
+     *        'items' => $menu['children']
+     *        ]
+     *    ]
+     * }
+     * ~~~
+     * @param boolean  $refresh
+     * @return array
+     */
+    public static function getMenu($userId, $root = null, $callback = null, $refresh = false)
+    {
+        $config = Configs::instance();
+
+        /* @var $manager \yii\rbac\BaseManager */
+        $manager = Yii::$app->getAuthManager();
+        $menus = Menu::find()->asArray()->indexBy('id')->all();
+        $key = [__METHOD__, $userId, $manager->defaultRoles];
+        $cache = $config->cache;
+
+        if ($refresh || $cache === null || ($assigned = $cache->get($key)) === false) {
+
+            $assigned = Menu::find()->select(['id'])->asArray()->column();
+
+            if ($cache !== null) {
+                $cache->set($key, $assigned, $config->cacheDuration, new TagDependency([
+                    'tags' => Configs::CACHE_TAG
+                ]));
+            }
+        }
+
+        $key = [__METHOD__, $assigned, $root];
+        $cache = null;
+        if ($refresh || $callback !== null || $cache === null || (($result = $cache->get($key)) === false)) {
+            $result = static::normalizeMenu($assigned, $menus, $callback, $root);
+            if ($cache !== null && $callback === null) {
+                $cache->set($key, $result, $config->cacheDuration, new TagDependency([
+                    'tags' => Configs::CACHE_TAG
+                ]));
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * Ensure all item menu has parent.
      * @param  array $assigned
      * @param  array $menus
