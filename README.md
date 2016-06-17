@@ -1,21 +1,53 @@
 RBAC Manager for Yii 2
 ======================
 
-Documentation
--------------
-> **Important: If you install version 3.x, please see [this readme](https://github.com/mdmsoft/yii2-admin/blob/3.master/README.md#upgrade-from-2x).**
-
-
-- [Change Log](CHANGELOG.md).
-- [Authorization Guide](http://www.yiiframework.com/doc-2.0/guide-security-authorization.html). Important, read this first before you continue.
-- [Basic Usage](docs/guide/basic-usage.md).
-- [Using Menu](docs/guide/using-menu.md).
-- [Api](http://mdmsoft.github.io/yii2-admin/index.html).
-
-Installation
-------------
-
 需要依赖这个[项目](https://github.com/liulipeng/Yii2-Project-Admin)来安装Admin, 详情请查阅 [https://github.com/liulipeng/Yii2-Project-Admin](https://github.com/liulipeng/Yii2-Project-Admin)
+
+
+### 功能
+
+1. 基础功能：登录，登出，密码修改等常见的功能
+
+2. 菜单配置：可视化配置菜单，可以根据配置用户的权限显示隐藏菜单
+
+3. 权限机制：角色、权限增删改查，以及给用户赋予角色权限
+
+4. 规则机制：除了权限角色之外有规则机制，即可以给对应的权限配置规则
+
+5. 二次开发：完全可以基于该系统做二次开发，开发一套适合自己的后台管理系统，节约权限控制以及部分基础功能开发的时间成本，后台系统开发的不二之选
+
+6. 持续更新：新的功能模块会持续更新，请关注
+
+### 安装
+
+最简单的安装，请访问[这里](https://github.com/liulipeng/Yii2-Project-Admin)查看
+
+### 预览
+
+#### 登录
+
+![](http://www.izyue.com/yii2-admin/index/1.jpg)
+
+#### 首页
+
+![](http://www.izyue.com/yii2-admin/index/2.jpg)
+
+#### 权限管理
+
+![](http://www.izyue.com/yii2-admin/index/3.jpg)
+
+#### 角色管理
+
+![](http://www.izyue.com/yii2-admin/index/4.jpg)
+
+#### 路由管理
+
+![](http://www.izyue.com/yii2-admin/index/5.jpg)
+
+#### 菜单管理
+
+![](http://www.izyue.com/yii2-admin/index/6.jpg)
+
 
 ### Install With Composer
 
