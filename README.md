@@ -3,6 +3,10 @@ RBAC Manager for Yii 2
 
 需要依赖这个[项目](https://github.com/liulipeng/Yii2-Project-Admin)来安装Admin, 详情请查阅 [https://github.com/liulipeng/Yii2-Project-Admin](https://github.com/liulipeng/Yii2-Project-Admin)
 
+[![Latest Stable Version](https://poser.pugx.org/izyue/yii2-admin/v/stable)](https://packagist.org/packages/izyue/yii2-admin)
+[![Total Downloads](https://poser.pugx.org/izyue/yii2-admin/downloads)](https://packagist.org/packages/izyue/yii2-admin)
+[![License](https://poser.pugx.org/izyue/yii2-admin/license)](https://packagist.org/packages/izyue/yii2-admin)
+[![Daily Downloads](https://poser.pugx.org/izyue/yii2-admin/d/daily)](https://packagist.org/packages/izyue/yii2-admin)
 
 ### 功能
 
