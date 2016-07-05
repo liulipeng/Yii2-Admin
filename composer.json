@@ -1,7 +1,7 @@
 {
     "name": "izyue/yii2-admin",
     "description": "RBAC Auth manager for Yii2 ",
-    "keywords": ["yii", "admin", "auth", "rbac", "yii2-admin", 'izyue'],
+    "keywords": ["yii", "admin", "auth", "rbac", "yii2-admin", "izyue"],
     "license": "BSD-3-Clause",
     "type": "yii2-extension",
     "authors": [
