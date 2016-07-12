@@ -10,21 +10,7 @@ use yii\grid\GridView;
 $this->title = Yii::t('rbac-admin', 'Permissions');
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->registerJs("
-//		jQuery(document).ready(function() {
-//              EditableTable.init();
-//        });
-");
-
 $this->registerCssFile('/statics/assets/data-tables/DT_bootstrap.css', ['depends'=>'backend\assets\AppAsset']);
-//
-//$this->registerJsFile('/statics/js/jquery-ui-1.9.2.custom.min.js', ['depends'=>'backend\assets\AppAsset']);
-//$this->registerJsFile('/statics/js/jquery-migrate-1.2.1.min.js', ['depends'=>'backend\assets\AppAsset']);
-//
-//
-//$this->registerJsFile('/statics/assets/data-tables/DT_bootstrap.js', ['depends'=>'backend\assets\AppAsset']);
-//$this->registerJsFile('/statics/js/respond.min.js', ['depends'=>'backend\assets\AppAsset']);
-//$this->registerJsFile('/statics/js/editable-table.js', ['depends'=>'backend\assets\AppAsset']);
 
 ?>
 
@@ -50,17 +36,10 @@ $this->registerCssFile('/statics/assets/data-tables/DT_bootstrap.css', ['depends
                         'class' => 'table table-striped table-hover table-bordered',
                         'id' => 'editable-sample',
                     ],
-                    'pager'=>array(              //通过pager设置样式   默认为CLinkPager
+                    'pager' => [
                         'prevPageLabel' => Yii::t('rbac-admin', 'Prev'),
-//                            'firstPageLabel'=>'首页',  //first,last 在默认样式中为{display:none}及不显示，通过样式{display:inline}即可
                         'nextPageLabel' => Yii::t('rbac-admin', 'Next'),
-//                            'lastPageLabel'=>'末页',
-//                            'header'=>'',
-                        'options'=>[
-                            'class' => '',
-//                            'style' => 'float: right;'
-                        ],
-                    ),
+                    ],
                     'layout'=> '{items}
                                 <div class="row">
                                     <div class="col-lg-6">

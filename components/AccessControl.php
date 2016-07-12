@@ -2,6 +2,7 @@
 
 namespace izyue\admin\components;
 
+use izyue\admin\models\Log;
 use yii\web\ForbiddenHttpException;
 use yii\base\Module;
 use Yii;
@@ -79,6 +80,14 @@ class AccessControl extends \yii\base\ActionFilter
             $obj = $obj->module;
         } while ($obj !== null);
         $this->denyAccess($user);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function afterAction($action, $result) {
+        Log::addLog($action);
+        return parent::afterAction($action, $result);
     }
 
     /**

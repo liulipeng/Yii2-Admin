@@ -74,5 +74,11 @@ return [
     'New route(s)' => '新路由',
     'Search for avaliable' => '搜索可用的',
     'Search for assigned' => '搜索已经分配',
+    'Url' => '链接',
+    'Email' => '邮箱',
+    'Ip' => 'IP',
+    'User Agent' => '浏览器代理商',
+    'Updated At' => '修改时间',
+    'Created At' => '添加时间',
 
 ];

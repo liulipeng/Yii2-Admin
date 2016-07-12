@@ -62,6 +62,11 @@ class Configs extends \yii\base\Object
     public $adminTable = '{{%admin}}';
 
     /**
+     * @var string Admin table name.
+     */
+    public $adminLogTable = '{{%admin_log}}';
+
+    /**
      * @var array 
      */
     public $options;

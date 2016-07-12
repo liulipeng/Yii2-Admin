@@ -4,28 +4,13 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
-/* @var $this yii\web\View */
+/* @var $this  yii\web\View */
+/* @var $model izyue\admin\models\BizRule */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $searchModel izyue\admin\models\searchs\Assignment */
-/* @var $usernameField string */
-/* @var $extraColumns string[] */
+/* @var $searchModel izyue\admin\models\searchs\BizRule */
 
-$this->title = Yii::t('rbac-admin', 'Assignments');
+$this->title = Yii::t('rbac-admin', 'Rules');
 $this->params['breadcrumbs'][] = $this->title;
-
-$columns = array_merge(
-    [
-    ['class' => 'yii\grid\SerialColumn'],
-    [
-        'class' => 'yii\grid\DataColumn',
-        'attribute' => $usernameField,
-    ],
-    ], $extraColumns, [
-    [
-        'class' => 'yii\grid\ActionColumn',
-    ],
-    ]
-);
 ?>
 
 <section class="wrapper site-min-height">
@@ -36,13 +21,7 @@ $columns = array_merge(
         </header>
         <div class="panel-body">
             <div class="adv-table editable-table ">
-                <div class="clearfix">
-                    <div class="btn-group">
-                        <?= Html::a(Yii::t('rbac-admin', 'Create User').' <i class="fa fa-plus"></i>', ['create'], ['class' => 'btn btn-success', 'style' => 'margin-bottom:15px;']) ?>
-                    </div>
-                </div>
                 <div class="space15"></div>
-                <?php Pjax::begin(); ?>
                 <?=
                 GridView::widget([
                     'dataProvider' => $dataProvider,
@@ -64,10 +43,25 @@ $columns = array_merge(
                                         <div class="dataTables_paginate paging_bootstrap pagination">{pager}</div>
                                     </div>
                                 </div>',
-                    'columns' => $columns,
-                ])
+                    'columns' => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        'route',
+                        'url',
+                        [
+                            'attribute' => 'admin.username',
+                            'filter' => Html::activeTextInput($searchModel, 'admin', [
+                                'class' => 'form-control', 'id' => null
+                            ]),
+                        ],
+                        'admin_email',
+                        'ip',
+                        [
+                            'class' => 'yii\grid\ActionColumn',
+                            'template' => '{view}'
+                        ],
+                    ],
+                ]);
                 ?>
-                <?php Pjax::end(); ?>
             </div>
         </div>
     </section>

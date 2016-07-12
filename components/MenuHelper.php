@@ -5,6 +5,7 @@ namespace izyue\admin\components;
 use Yii;
 use yii\caching\TagDependency;
 use izyue\admin\models\Menu;
+use yii\helpers\ArrayHelper;
 
 /**
  * MenuHelper used to generate menu depend of user role.
@@ -129,6 +130,7 @@ class MenuHelper
         $key = [__METHOD__, $assigned, $root];
         $cache = null;
         if ($refresh || $callback !== null || $cache === null || (($result = $cache->get($key)) === false)) {
+
             $result = static::normalizeMenu($assigned, $menus, $callback, $root);
             if ($cache !== null && $callback === null) {
                 $cache->set($key, $result, $config->cacheDuration, new TagDependency([
@@ -252,9 +254,7 @@ class MenuHelper
         $result = [];
         $order = [];
         foreach ($assigned as $id) {
-            $menu = $menus[$id];
-//            print_r($menu);
-//            die;
+            $menu = ArrayHelper::getValue($menus, $id);
             if ($menu['parent'] == $parent) {
                 $menu['children'] = static::normalizeMenu($assigned, $menus, $callback, $id);
                 if ($callback !== null) {
