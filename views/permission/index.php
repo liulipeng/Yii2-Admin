@@ -10,7 +10,7 @@ use yii\grid\GridView;
 $this->title = Yii::t('rbac-admin', 'Permissions');
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->registerCssFile('/statics/assets/data-tables/DT_bootstrap.css', ['depends'=>'backend\assets\AppAsset']);
+$this->registerCssFile('@web/statics/assets/data-tables/DT_bootstrap.css', ['depends'=>'backend\assets\AppAsset']);
 
 ?>
 
