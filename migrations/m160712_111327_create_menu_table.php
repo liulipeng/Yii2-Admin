@@ -62,7 +62,16 @@ class m160712_111327_create_menu_table extends \yii\db\Migration
             ]
         ]);
 
-        $sql = "INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
+        //获取表前缀
+        $config = Configs::instance();
+        $tablePrefix = '';
+        if(!empty($config->db)){
+            $db = $config->db;
+            if(!empty($db->tablePrefix)){
+                $tablePrefix = $db->tablePrefix;
+            }
+        }
+        $sql = "INSERT INTO `".$tablePrefix."auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
                 ('/admin/*', 2, NULL, NULL, NULL, 1457330826, 1457330826),
                 ('/admin/assignment/*', 2, NULL, NULL, NULL, 1457330826, 1457330826),
                 ('/admin/assignment/assign', 2, NULL, NULL, NULL, 1457330826, 1457330826),
@@ -167,10 +176,10 @@ class m160712_111327_create_menu_table extends \yii\db\Migration
                 ('路由管理', 2, NULL, NULL, NULL, 1457331368, 1457331368);";
         $this->execute($sql);
 
-        $sql = "INSERT INTO `auth_assignment` VALUES ('Admin','1',1457092343);";
+        $sql = "INSERT INTO `".$tablePrefix."auth_assignment` VALUES ('Admin','1',1457092343);";
         $this->execute($sql);
 
-        $sql = "INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
+        $sql = "INSERT INTO `".$tablePrefix."auth_item_child` (`parent`, `child`) VALUES
                 ('用户权限分配', '/admin/assignment/assign'),
                 ('新增用户', '/admin/assignment/create'),
                 ('用户管理', '/admin/assignment/index'),
