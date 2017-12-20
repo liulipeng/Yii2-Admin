@@ -194,7 +194,6 @@ class MenuHelper
                 ]));
             }
         }
-
         return $result;
     }
 
@@ -265,6 +264,7 @@ class MenuHelper
                         'order' => $menu['order'],
                         'label' => $menu['name'],
                         'url' => static::parseRoute($menu['route']),
+                        'data' => json_decode($menu['data'], true),
                     ];
                     if ($menu['children'] != []) {
                         $item['items'] = $menu['children'];

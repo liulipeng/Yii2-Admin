@@ -2,7 +2,9 @@
 
 namespace izyue\admin\controllers;
 
+use backend\models\Admin;
 use backend\models\SignupForm;
+use common\models\Department;
 use izyue\admin\components\MenuHelper;
 use Yii;
 use izyue\admin\models\searchs\Assignment as AssignmentSearch;
@@ -24,7 +26,7 @@ class AssignmentController extends Controller
     public $usernameField = 'username';
     public $fullnameField;
     public $searchClass;
-    public $extraColumns = [];
+    public $extraColumns = [['label' => '角色名', 'value' => 'item_name']];
 
     /**
      * @inheritdoc
@@ -224,17 +226,21 @@ class AssignmentController extends Controller
      */
     public function actionCreate()
     {
-
         $model = new $this->userClassName;
         $model->setScenario('create');
+        $depand = Department::find()->asArray()->all();
+        $data = self::noLimitCate($depand);
         if ($model->load(Yii::$app->request->post())) {
+
             if ($user = $model->signup()) {
+
                 return $this->redirect(['index']);
             }
         }
 
         return $this->render('create', [
             'model' => $model,
+            'data' => $data
         ]);
 
     }
@@ -248,13 +254,19 @@ class AssignmentController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        
         $model->setScenario('update');
+        $depand = Department::find()->asArray()->all();
+        $data = self::noLimitCate($depand);
         if($model->load(Yii::$app->request->post())){
+            //print_r(Yii::$app->request->post());die;
+            $model->headPortrait = empty(Yii::$app->request->post()['AdminModel']['headPortrait']) ? '' :Yii::$app->request->post()['AdminModel']['headPortrait'];
+            $model->partmentId = empty(Yii::$app->request->post()['AdminModel']['partmentId']) ? '' :Yii::$app->request->post()['AdminModel']['partmentId'];
             if($model->password){
                 $model->setPassword($model->password);
                 $model->generateAuthKey();
             }
-
+            $model->updated_at = time();
             if ($model->save()) {
                 //MenuHelper::invalidate();
                 return $this->redirect(['index']);
@@ -266,6 +278,7 @@ class AssignmentController extends Controller
         }else{
             return $this->render('update', [
                 'model' => $model,
+                'data' => $data
             ]);
         }
 
@@ -280,8 +293,9 @@ class AssignmentController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-        MenuHelper::invalidate();
+        $this->findModel($id)->deleteAll(['id'=>$id]);
+        //Admin::deleteAll(['id'=>$id]);
+        Helper::invalidate();
 
         return $this->redirect(['index']);
     }
@@ -302,4 +316,20 @@ class AssignmentController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    //递归查询部门表
+    public function noLimitCate($data,$parent_id=0,$level=0){
+        //使用静态变量保存遍历出来的所有分类信息
+        static $arr=array();
+        foreach($data as $key=>$v){
+            if($v['parentId']==$parent_id){
+                $v['level']=$level; //给数组增加一个元素来是层级关系分开
+                $arr[]=$v;
+                //所有的子类获取方法跟父类的方法一样
+                $this->noLimitCate($data,$v['id'],$level+1);
+            }
+        }
+        return $arr;
+    }
+
 }

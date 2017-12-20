@@ -47,7 +47,9 @@ class Assignment extends Model
      */
     public function search($params, $class, $usernameField)
     {
-        $query = $class::find();
+//        $query = $class::find()->where(['status'=>10])->orderBy(['id'=>SORT_DESC]);
+        $query = $class::find()->alias('a')->select('a.*,s.*')->where(['status'=>10])
+            ->leftJoin(['s' => '{{%auth_assignment}}'], 's.user_id = a.id')->orderBy(['id'=>SORT_DESC])->asArray();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);

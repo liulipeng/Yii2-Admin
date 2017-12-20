@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = Yii::t('rbac-admin', 'Update');
     <?=
     $this->render('_form', [
         'model' => $model,
+        'data' => $data
     ]);
     ?>
 </section>
