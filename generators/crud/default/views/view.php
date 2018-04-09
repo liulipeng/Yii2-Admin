@@ -60,6 +60,8 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
                                 ],
                             ]) ?>
                         </div>
+                    </div>
+                </div>
             </section>
         </div>
     </div>
