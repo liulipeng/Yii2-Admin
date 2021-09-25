@@ -61,7 +61,7 @@ class AuthItem extends \yii\base\Model
                 'range' => array_keys(Yii::$app->authManager->getRules()),
                 'message' => 'Rule not exists'],
             [['name', 'type'], 'required'],
-            [['name'], 'unique', 'when' => function() {
+            [['name'], 'uniqueValidate', 'when' => function() {
                 return $this->isNewRecord || ($this->_item->name != $this->name);
             }],
             [['type'], 'integer'],
@@ -70,7 +70,7 @@ class AuthItem extends \yii\base\Model
         ];
     }
 
-    public function unique()
+    public function uniqueValidate()
     {
         $authManager = Yii::$app->authManager;
         $value = $this->name;
